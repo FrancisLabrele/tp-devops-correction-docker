@@ -116,3 +116,8 @@
 	</build>
 
 </project>
+
+<properties>
+  <sonar.organization>francislabrele</sonar.organization>
+  <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+</properties>
