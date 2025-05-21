@@ -28,7 +28,7 @@ jobs:
         with:
           context: ./simple-api
           tags: |
-            ${{ secrets.DOCKERHUB_NAMESPACE }}/tp-devops-simple-api-backend:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-backend:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-backend:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
@@ -37,7 +37,7 @@ jobs:
         with:
           context: ./database
           tags: |
-            ${{ secrets.DOCKERHUB_NAMESPACE }}/tp-devops-simple-api-database:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-database:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-database:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
@@ -46,6 +46,6 @@ jobs:
         with:
           context: ./http-server
           tags: |
-            ${{ secrets.DOCKERHUB_NAMESPACE }}/tp-devops-simple-api-httpd:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-httpd:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-httpd:latest
           push: ${{ github.ref == 'refs/heads/main' }}
