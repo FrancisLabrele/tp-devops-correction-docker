@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-push:
-    name: Build & Push Docker Images
+    name: Build and Push Docker Images
     runs-on: ubuntu-24.04
     if: >
       github.event.workflow_run.conclusion == 'success' &&
@@ -27,7 +27,9 @@ jobs:
         uses: docker/build-push-action@v6
         with:
           context: ./simple-api
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-backend:latest
+          tags: |
+            ${{ secrets.DOCKERHUB_NAMESPACE }}/tp-devops-simple-api-database:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-backend:latest
           push: ${{ github.ref == 'refs/heads/main' }}
 
       - name: Build and push database image
