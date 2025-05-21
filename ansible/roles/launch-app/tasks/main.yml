@@ -9,5 +9,6 @@
       DATABASE_PASSWORD: pwd
     name: backend
     image: francoisthievon/tp-devops-simple-api-backend
+    pull: yes
     networks: 
       - name: app-network

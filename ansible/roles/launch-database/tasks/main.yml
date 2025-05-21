@@ -8,5 +8,6 @@
       POSTGRES_PASSWORD: pwd
     name: database
     image: francoisthievon/tp-devops-simple-api-database
+    pull: yes
     networks: 
       - name: app-network
