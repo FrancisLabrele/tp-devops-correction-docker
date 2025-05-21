@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    name: ▶️ Deploy via Ansible
+    name: Deploy via Ansible
     runs-on: ubuntu-latest
     steps:
 
@@ -36,6 +36,7 @@ jobs:
           ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
       - name: Run Ansible Playbook
+        working-directory: ansible
         run: |
           ansible-playbook \
             -i inventories/setup.yml playbook.yml \
