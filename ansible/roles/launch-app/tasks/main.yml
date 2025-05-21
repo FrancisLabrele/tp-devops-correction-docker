@@ -1,0 +1,13 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/launch-app
+
+- name: Run backend
+  docker_container:
+    env:
+      DATABASE_HOST: database
+      DATABASE_PASSWORD: pwd
+    name: backend
+    image: francoisthievon/tp-devops-simple-api-backend
+    networks: 
+      - name: app-network
