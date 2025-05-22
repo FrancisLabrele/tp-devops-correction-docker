@@ -19,5 +19,10 @@ public class GreetingController {
         return new Greeting(counter.incrementAndGet(), String.format(TEMPLATE, name));
     }
 
+    @GetMapping("/lou")
+    public String simpleMessage() {
+        return "Lou je t'aime !!!";
+    }
+
     record Greeting(long id, String content) { }
 }
