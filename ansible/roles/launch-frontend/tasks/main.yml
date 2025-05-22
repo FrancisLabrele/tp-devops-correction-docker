@@ -9,3 +9,5 @@
     pull: yes
     networks:
       - name: app-network
+    ports:
+      - "8888:80"
