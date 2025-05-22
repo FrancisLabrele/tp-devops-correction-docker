@@ -1,29 +1,183 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>Bienvenue sur mon API</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Page Super Belle</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap" rel="stylesheet">
   <style>
-    body { font-family: sans-serif; max-width: 600px; margin: 2em auto; }
-    h1 { color: #2c3e50; }
-    input, button { padding: .5em; font-size: 1em; }
+    /* Reset basique */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* Fond dégradé animé */
+    body {
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #ff416c, #ff4b2b, #1fa2ff, #12d8fa);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Carte centrale */
+    .card {
+      position: relative;
+      z-index: 1;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      padding: 2rem;
+      text-align: center;
+      max-width: 600px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .card::before, .card::after {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.5), transparent);
+      animation: shine 4s linear infinite;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .card::before { top: -50%; left: -50%; }
+    .card::after  { bottom: -50%; right: -50%; animation-delay: 2s; }
+    @keyframes shine {
+      0%   { transform: translate(0,0) rotate(0deg); }
+      100% { transform: translate(50%,50%) rotate(360deg); }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #333;
+      position: relative; /* au-dessus des lueurs */
+      z-index: 1;
+    }
+    p {
+      margin-bottom: 1.5rem;
+      color: #555;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Bouton animé */
+    .btn {
+      position: relative;
+      background: linear-gradient(45deg, #ff4b2b, #ff416c);
+      color: #fff;
+      border: none;
+      padding: 0.75rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 50px;
+      cursor: pointer;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      z-index: 1;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+    .btn::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.5), transparent 70%);
+      transform: scale(0);
+      transition: transform 0.5s ease;
+      pointer-events: none;
+    }
+    .btn:active::before {
+      transform: scale(1);
+      transition: 0s;
+    }
+
+    /* Toast message */
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 50px;
+      padding: 1rem;
+      position: fixed;
+      z-index: 10;
+      left: 50%;
+      bottom: 30px;
+      font-size: 1rem;
+      opacity: 0;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Conteneur vidéo responsive */
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 */
+      margin-top: 2rem;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
   </style>
 </head>
 <body>
-  <h1>Ma superbe interface</h1>
-  <p>Entrez votre nom pour obtenir une salutation :</p>
-  <input id="name" placeholder="François" />
-  <button onclick="fetchGreeting()">Dire bonjour</button>
-  <pre id="result"></pre>
+
+  <div class="card">
+    <h1>🌟 Bienvenue sur le serveur de François ! 🌟</h1>
+    <p>Cliquez sur le bouton pour une surprise et profitez de DIO !</p>
+    <button class="btn" onclick="showToast('🎉 Lucas caca 💩')">Cliquez-moi</button>
+
+    <!-- Intégration de la vidéo YouTube -->
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube.com/embed/2OxaFKuHUkc?rel=0"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </div>
+
+  <div id="toast"></div>
 
   <script>
-    async function fetchGreeting() {
-      const name = document.getElementById('name').value || 'François !';
-      const resp = await fetch(`/api/greeting?name=${encodeURIComponent(name)}`);
-      const json = await resp.json();
-      document.getElementById('result').textContent =
-        `ID=${json.id}\nMessage=${json.content}`;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
     }
   </script>
+
 </body>
 </html>
