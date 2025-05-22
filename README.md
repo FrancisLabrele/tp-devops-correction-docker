@@ -31,4 +31,5 @@ Done
   - 1st action : Check that the code is ready to run and qualitative with SonarCloud
   - 2nd action : Build the images with Dockerfile and push them on dockerhub
   - 3rd action : Pull the images from dockerhub and create the containers on my personal takima server in order to run the web page  
-Everything works perfectly ! If we destroy the server, we just need to push anything for the actions to run again and create the site again !
+
+### Everything works perfectly ! If we destroy the server, we just need to push anything for the actions to run again and create the site again !
