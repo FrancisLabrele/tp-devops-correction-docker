@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Page Super Belle</title>
+  <title>Serveur du GOAT</title>
   <!-- Google Font -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;900&display=swap" rel="stylesheet">
   <style>
@@ -62,7 +62,7 @@
       font-size: 2.5rem;
       margin-bottom: 1rem;
       color: #333;
-      position: relative; /* au-dessus des lueurs */
+      position: relative;
       z-index: 1;
     }
     p {
@@ -72,7 +72,7 @@
       z-index: 1;
     }
 
-    /* Bouton animé */
+    /* Bouton principal */
     .btn {
       position: relative;
       background: linear-gradient(45deg, #ff4b2b, #ff416c);
@@ -108,27 +108,24 @@
       transition: 0s;
     }
 
-    /* Toast message */
-    #toast {
-      visibility: hidden;
-      min-width: 250px;
-      margin-left: -125px;
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      border-radius: 50px;
-      padding: 1rem;
+    /* Bouton Rickroll en coin */
+    .never-btn {
       position: fixed;
+      top: 10px; right: 10px;
+      background: #000;
+      color: #fff;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.9rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: opacity 0.2s, transform 0.2s;
       z-index: 10;
-      left: 50%;
-      bottom: 30px;
-      font-size: 1rem;
-      opacity: 0;
-      transition: opacity 0.5s, visibility 0.5s;
     }
-    #toast.show {
-      visibility: visible;
+    .never-btn:hover {
       opacity: 1;
+      transform: scale(1.05);
     }
 
     /* Conteneur vidéo responsive */
@@ -148,16 +145,49 @@
       width: 100%; height: 100%;
       border: 0;
     }
+
+    /* Toast message */
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 50px;
+      padding: 1rem;
+      position: fixed;
+      z-index: 20;
+      left: 50%;
+      bottom: 30px;
+      font-size: 1rem;
+      opacity: 0;
+      transition: opacity 0.5s, visibility 0.5s;
+    }
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Audio caché */
+    audio { display: none; }
   </style>
 </head>
 <body>
 
-  <div class="card">
-    <h1>🌟 Bienvenue sur le serveur de François ! 🌟</h1>
-    <p>Cliquez sur le bouton pour une surprise et profitez de DIO !</p>
-    <button class="btn" onclick="showToast('🎉 Lucas caca 💩')">Cliquez-moi</button>
+  <!-- Bouton Never click -->
+  <button class="never-btn"
+          onclick="window.location.href='https://www.youtube.com/watch?v=dQw4w9WgXcQ&ab_channel=RickAstley'">
+    Never click
+  </button>
 
-    <!-- Intégration de la vidéo YouTube -->
+  <div class="card">
+    <h1>🔥 Bienvenue chez François ! 🌟</h1>
+    <p>Clique sur les bouton du site du goat</p>
+    <!-- Bouton principal : son + toast -->
+    <button class="btn" onclick="mainClick()">Surprise ! 😜</button>
+
+    <!-- Vidéo intégrée -->
     <div class="video-container">
       <iframe
         src="https://www.youtube.com/embed/2OxaFKuHUkc?rel=0"
@@ -168,16 +198,28 @@
     </div>
   </div>
 
+  <!-- Toast message -->
   <div id="toast"></div>
 
+  <!-- Son de pet -->
+  <audio id="audio-fart" src="fart.mp3" preload="auto"></audio>
+
   <script>
+    function playFart() {
+      const sound = document.getElementById('audio-fart');
+      sound.currentTime = 0;
+      sound.play();
+    }
     function showToast(message) {
       const toast = document.getElementById('toast');
       toast.textContent = message;
       toast.classList.add('show');
       setTimeout(() => toast.classList.remove('show'), 3000);
     }
+    function mainClick() {
+      playFart();
+      showToast('🎉 Caca ! 💩');
+    }
   </script>
-
 </body>
 </html>
