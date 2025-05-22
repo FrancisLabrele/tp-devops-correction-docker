@@ -49,3 +49,12 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-httpd:${{ github.sha }}
             ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-httpd:latest
           push: ${{ github.ref == 'refs/heads/main' }}
+
+      - name: Build and push httpd frontend image
+        uses: docker/build-push-action@v6
+        with:
+          context: ./frontend
+          tags: |
+            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-frontend:${{ github.sha }}
+            ${{ secrets.DOCKERHUB_USERNAME }}/tp-devops-simple-api-frontend:latest
+          push: ${{ github.ref == 'refs/heads/main' }}

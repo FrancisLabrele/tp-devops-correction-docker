@@ -1,0 +1,11 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for roles/launch-database
+
+- name: Run frontend
+  docker_container:
+    name: frontend
+    image: francoisthievon/tp-devops-simple-api-frontend
+    pull: yes
+    networks:
+      - name: app-network
